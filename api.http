@@ -1,0 +1,108 @@
+### sign-up
+POST http://0.0.0.0:8080/signup
+Content-Type: application/json
+
+{
+  "email": "example@domain.nam2e",
+  "userType": "staff",
+  "password": "awesomepass123",
+  "name": "John Doe",
+  "phone": "1234567890",
+  "address": "123 Main St, City, State, 12345"
+}
+
+### sign-in
+POST http://0.0.0.0:8080/signin
+Content-Type: application/json
+
+{
+  "email": "example@domain.nam2e",
+  "password": "awesomepass123"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### validate token
+GET http://0.0.0.0:8080/validate
+Authorization: Bearer {{auth_token}}
+
+### get user
+GET http://0.0.0.0:8080/me
+Authorization: Bearer {{auth_token}}
+
+### update user
+PUT http://0.0.0.0:8080/me
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "userType": "Senior ev",
+  "name": "Daan",
+  "phone": "+31639899470",
+  "address": "Nee hoor 123"
+}
+
+### delete user
+DELETE http://0.0.0.0:8080/me
+Authorization: Bearer {{auth_token}}
+
+
+
+### get categories
+GET http://0.0.0.0:8080/categories
+Authorization: Bearer {{auth_token}}
+
+### get meal
+GET http://0.0.0.0:8080/categories/2
+Authorization: Bearer {{auth_token}}
+
+### create categories
+POST http://0.0.0.0:8080/categories
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "title": "Bread",
+  "description": "Bread Bread"
+}
+
+### get meals
+GET http://0.0.0.0:8080/meals
+Authorization: Bearer {{auth_token}}
+
+### get meal
+GET http://0.0.0.0:8080/meals/1
+Authorization: Bearer {{auth_token}}
+
+### create meals
+POST http://0.0.0.0:8080/meals
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "title": "Soup",
+  "price": 25.8,
+  "imageUrl": "https://www.inspiredtaste.net/wp-content/uploads/2018/09/Easy-Chicken-Noodle-Soup-Recipe-1200jpg",
+  "categoryIds": [1, 2]
+}
+
+### get all orders
+GET http://0.0.0.0:8080/orderHistory
+Authorization: Bearer {{auth_token}}
+
+### get incomplete orders
+GET http://0.0.0.0:8080/orderIncomplete
+Authorization: Bearer {{auth_token}}
+
+### create meals
+POST http://0.0.0.0:8080/order
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "mealIds": [1]
+}
+
+### mark order ready
+POST http://0.0.0.0:8080/order/2/markReady
+Authorization: Bearer {{auth_token}}
